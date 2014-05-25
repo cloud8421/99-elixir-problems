@@ -16,7 +16,7 @@ defmodule NinetyNineProblems.ListsTest do
   end
 
   test "finds the length of a list" do
-    assert Lists.length([1,2,3,4]) == 4
+    assert Lists.llength([1,2,3,4]) == 4
   end
 
   test "reverses a list" do
@@ -38,6 +38,22 @@ defmodule NinetyNineProblems.ListsTest do
 
   test "packs consecutive duplicates into sublists" do
     assert Lists.pack([1,3,3,5,6,6,5]) == [[1], [3, 3], [5], [6,6], [5]]
+  end
+
+  test "run-length encodes a list" do
+    assert Lists.encode([1,3,3,3,4,4,5,6,6,6,6]) == [[1,1], [3,3], [2,4], [1,5], [4,6]]
+  end
+
+  test "modified run-length encodes a list" do
+    assert Lists.mod_encode([1,3,3,3,4,4,5,6,6,6,6]) == [1, [3,3], [2,4], 5, [4,6]]
+  end
+
+  test "decodes a run-length encoded list" do
+    assert Lists.decode([1, [3,3], [2,4], 5, [4,6]]) == [1,3,3,3,4,4,5,6,6,6,6]
+  end
+
+  test "directly run-length encodes a list" do
+    assert Lists.dir_encode([1,3,3,3,4,4,5,6,6,6,6]) == [1, [3,3], [2,4], 5, [4,6]]
   end
 
 end

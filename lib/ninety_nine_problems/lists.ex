@@ -22,11 +22,11 @@ defmodule NinetyNineProblems do
       do_element_at(t, index, counter + 1)
     end
 
-    def length([]), do: do_length([], 0)
-    def length(list), do: do_length(list, 0)
-    defp do_length([], counter), do: counter
-    defp do_length([_h|t], counter) do
-      do_length(t, counter + 1)
+    def llength([]), do: do_llength([], 0)
+    def llength(list), do: do_llength(list, 0)
+    defp do_llength([], counter), do: counter
+    defp do_llength([_h|t], counter) do
+      do_llength(t, counter + 1)
     end
 
     def reverse([]), do: do_reverse([], [])
@@ -41,35 +41,75 @@ defmodule NinetyNineProblems do
 
     def flatten([]), do: do_flatten([], [])
     def flatten(list), do: do_flatten(list, [])
-    def do_flatten([], acc), do: acc |> reverse
-    def do_flatten([h|t], acc) when is_list(h) do
+    defp do_flatten([], acc), do: acc |> reverse
+    defp do_flatten([h|t], acc) when is_list(h) do
       do_flatten(t, do_flatten(h, acc) |> reverse)
     end
-    def do_flatten([h|t], acc) do
+    defp do_flatten([h|t], acc) do
       do_flatten(t, [h|acc])
     end
 
     def compress([]), do: do_compress([], nil, [])
     def compress(list), do: do_compress(list, nil, [])
-    def do_compress([], _h, acc), do: acc |> reverse
-    def do_compress([h|t], h, acc) do
+    defp do_compress([], _h, acc), do: acc |> reverse
+    defp do_compress([h|t], h, acc) do
       do_compress(t, h, acc)
     end
-    def do_compress([h|t], _previous, acc) do
+    defp do_compress([h|t], _previous, acc) do
       do_compress(t, h, [h|acc])
     end
 
     def pack(list), do: do_pack(list, nil, [], [])
-    def do_pack([], _h, previous_sublist, acc), do: [previous_sublist|acc] |> reverse
-    def do_pack([h|t], nil, [], acc) do
+    defp do_pack([], _h, previous_sublist, acc), do: [previous_sublist|acc] |> reverse
+    defp do_pack([h|t], nil, [], acc) do
       do_pack(t, h, [h], acc)
     end
-    def do_pack([h|t], h, previous_sublist, acc) do
+    defp do_pack([h|t], h, previous_sublist, acc) do
       do_pack(t, h, [h | previous_sublist], acc)
     end
-    def do_pack([h|t], _h, previous_sublist, acc) do
+    defp do_pack([h|t], _h, previous_sublist, acc) do
       do_pack(t, h, [h], [previous_sublist|acc])
     end
+
+    def encode(list), do: do_encode(list |> pack, [])
+    defp do_encode([], acc), do: acc |> reverse
+    defp do_encode([h|t], acc) do
+      do_encode(t, [[llength(h), last(h)]|acc])
+    end
+
+    def mod_encode(list), do: do_mod_encode(list |> pack, [])
+    defp do_mod_encode([], acc), do: acc |> reverse
+    defp do_mod_encode([h|t], acc) when length(h) == 1 do
+      do_mod_encode(t, [last(h)|acc])
+    end
+    defp do_mod_encode([h|t], acc) do
+      do_mod_encode(t, [[llength(h), last(h)]|acc])
+    end
+
+    def decode(list), do: do_decode(list, [])
+    defp do_decode([], acc), do: acc |> reverse
+    defp do_decode([[0,_n]|t], acc) do
+      do_decode(t, acc)
+    end
+    defp do_decode([[i, n]|t], acc) do
+      do_decode([[i-1,n]|t], [n|acc])
+    end
+    defp do_decode([h|t], acc) do
+      do_decode(t, [h|acc])
+    end
+
+    def dir_encode([h|t]), do: do_dir_encode(t, [1,h], [])
+    defp do_dir_encode([], counter, acc), do: [counter|acc] |> reverse
+    defp do_dir_encode([h|t], [n,h], acc) do
+      do_dir_encode(t, [n+1,h], acc)
+    end
+    defp do_dir_encode([h|t], [1,n], acc) do
+      do_dir_encode(t, [1,h], [n|acc])
+    end
+    defp do_dir_encode([h|t], counter, acc) do
+      do_dir_encode(t, [1,h], [counter|acc])
+    end
+
   end
 
 end
