@@ -17,7 +17,7 @@ defmodule NinetyNineProblems do
 
     def element_at([], _index), do: nil
     def element_at(list, index), do: do_element_at(list, index, 1)
-    defp do_element_at([h|_t], index, counter) when index == counter, do: h
+    defp do_element_at([h|_t], index, index), do: h
     defp do_element_at([_h|t], index, counter) do
       do_element_at(t, index, counter + 1)
     end
