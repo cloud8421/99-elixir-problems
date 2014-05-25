@@ -56,4 +56,8 @@ defmodule NinetyNineProblems.ListsTest do
     assert Lists.dir_encode([1,3,3,3,4,4,5,6,6,6,6]) == [1, [3,3], [2,4], 5, [4,6]]
   end
 
+  test "duplicates element of a list" do
+    assert Lists.duplicate([1,2,3]) == [1,1,2,2,3,3]
+  end
+
 end

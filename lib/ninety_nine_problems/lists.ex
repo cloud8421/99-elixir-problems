@@ -110,6 +110,12 @@ defmodule NinetyNineProblems do
       do_dir_encode(t, [1,h], [counter|acc])
     end
 
+    def duplicate(list), do: do_duplicate(list, [])
+    defp do_duplicate([], acc), do: acc |> reverse
+    defp do_duplicate([h|t], acc) do
+      do_duplicate(t, [h|[h|acc]])
+    end
+
   end
 
 end
