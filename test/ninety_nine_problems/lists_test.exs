@@ -22,4 +22,22 @@ defmodule NinetyNineProblems.ListsTest do
   test "reverses a list" do
     assert Lists.reverse([1,2,3,4]) == [4,3,2,1]
   end
+
+  test "list is a palindrome" do
+    assert Lists.is_palindrome([1,2,2,4]) == false
+    assert Lists.is_palindrome([1,2,2,1]) == true
+  end
+
+  test "flattens a nested list" do
+    assert Lists.flatten([1, [2,3], 4]) == [1,2,3,4]
+  end
+
+  test "eliminates consecutive duplicates of a list" do
+    assert Lists.compress([1,3,3,5,6,6,5]) == [1,3,5,6,5]
+  end
+
+  test "packs consecutive duplicates into sublists" do
+    assert Lists.pack([1,3,3,5,6,6,5]) == [[1], [3, 3], [5], [6,6], [5]]
+  end
+
 end
