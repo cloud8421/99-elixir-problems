@@ -149,6 +149,12 @@ defmodule NinetyNineProblems do
       do_slice(t, start, finish, current+1, acc)
     end
 
+    def rotate(list, counter), do: do_rotate(list, counter, counter, [])
+    defp do_rotate(list, 0, _counter, acc), do: list ++ (acc |> reverse)
+    defp do_rotate([h|t], current_counter, counter, acc) do
+      do_rotate(t, current_counter-1, counter, [h|acc])
+    end
+
   end
 
 end

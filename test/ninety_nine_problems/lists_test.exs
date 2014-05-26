@@ -76,4 +76,8 @@ defmodule NinetyNineProblems.ListsTest do
     assert Lists.slice([1,2,3,4,5,6], 2, 4) == [2,3,4]
   end
 
+  test "rotates a list" do
+    assert Lists.rotate([1,2,3,4,5], 3) == [4,5,1,2,3]
+  end
+
 end
