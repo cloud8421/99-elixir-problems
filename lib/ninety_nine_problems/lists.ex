@@ -116,6 +116,15 @@ defmodule NinetyNineProblems do
       do_duplicate(t, [h|[h|acc]])
     end
 
+    def multiply(list, amount), do: do_multiply(list, amount, amount, [])
+    defp do_multiply([], _current_amount, _total_amount, acc), do: acc |> reverse
+    defp do_multiply([h|t], 1, total_amount, acc) do
+      do_multiply(t, total_amount, total_amount, [h|acc])
+    end
+    defp do_multiply([h|t], current_amount, total_amount, acc) do
+      do_multiply([h|t], current_amount-1, total_amount, [h|acc])
+    end
+
   end
 
 end

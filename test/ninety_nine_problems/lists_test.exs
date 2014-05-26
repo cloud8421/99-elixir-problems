@@ -60,4 +60,8 @@ defmodule NinetyNineProblems.ListsTest do
     assert Lists.duplicate([1,2,3]) == [1,1,2,2,3,3]
   end
 
+  test "multiplies element of a list" do
+    assert Lists.multiply([1,2,3], 3) == [1,1,1,2,2,2,3,3,3]
+  end
+
 end
