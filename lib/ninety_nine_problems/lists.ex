@@ -125,6 +125,21 @@ defmodule NinetyNineProblems do
       do_multiply([h|t], current_amount-1, total_amount, [h|acc])
     end
 
+    def drop_every(list, index), do: do_drop_every(list, index, index, [])
+    defp do_drop_every([], _current_index, _index, acc), do: acc |> reverse
+    defp do_drop_every([_h|t], 1, index, acc) do
+      do_drop_every(t, index, index, acc)
+    end
+    defp do_drop_every([h|t], current_index, index, acc) do
+      do_drop_every(t, current_index-1, index, [h|acc])
+    end
+
+    def split(list, index), do: do_split(list, index, index, [])
+    defp do_split(list, 0, _index, acc), do: [acc |> reverse, list]
+    defp do_split([h|t], current_index, index, acc) do
+      do_split(t, current_index-1, index, [h|acc])
+    end
+
   end
 
 end

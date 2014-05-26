@@ -64,4 +64,12 @@ defmodule NinetyNineProblems.ListsTest do
     assert Lists.multiply([1,2,3], 3) == [1,1,1,2,2,2,3,3,3]
   end
 
+  test "drops every nth element of a list" do
+    assert Lists.drop_every([1,2,3,4,5,6,7], 3) == [1,2,4,5,7]
+  end
+
+  test "splits a list into two" do
+    assert Lists.split([1,2,3,4,5,6], 3) == [[1,2,3], [4,5,6]]
+  end
+
 end
