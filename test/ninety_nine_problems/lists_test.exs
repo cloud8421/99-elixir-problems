@@ -72,4 +72,8 @@ defmodule NinetyNineProblems.ListsTest do
     assert Lists.split([1,2,3,4,5,6], 3) == [[1,2,3], [4,5,6]]
   end
 
+  test "slices a list" do
+    assert Lists.slice([1,2,3,4,5,6], 2, 4) == [2,3,4]
+  end
+
 end

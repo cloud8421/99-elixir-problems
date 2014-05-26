@@ -140,6 +140,15 @@ defmodule NinetyNineProblems do
       do_split(t, current_index-1, index, [h|acc])
     end
 
+    def slice(list, start, finish), do: do_slice(list, start, finish, 1,[])
+    defp do_slice([h|_t], _start, _finish, _finish, acc), do: [h|acc] |> reverse
+    defp do_slice([h|t], start, finish, current, acc) when current >= start do
+      do_slice(t, start, finish, current+1, [h|acc])
+    end
+    defp do_slice([_h|t], start, finish, current, acc) do
+      do_slice(t, start, finish, current+1, acc)
+    end
+
   end
 
 end
