@@ -92,4 +92,12 @@ defmodule NinetyNineProblems.ListsTest do
     assert Lists.range(1,5) == [1,2,3,4,5]
   end
 
+  test "extract n random items from a list" do
+    assert Lists.sample([1,2,3,4,5], 3) |> length == 3
+  end
+
+  test "extract n random items from a range" do
+    assert Lists.range_sample(1,9,3) |> length == 3
+  end
+
 end

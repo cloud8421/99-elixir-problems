@@ -179,6 +179,17 @@ defmodule NinetyNineProblems do
       do_range(start+1, finish, [start | acc])
     end
 
+    def sample(list, counter), do: do_sample(list, counter, [])
+    defp do_sample(_list, 0, acc), do: acc |> reverse
+    defp do_sample(list, counter, acc) do
+      pick = llength(list) |> :random.uniform
+      do_sample(list, counter-1, [pick|acc])
+    end
+
+    def range_sample(start, finish, counter) do
+      range(start, finish) |> sample(counter)
+    end
+
   end
 
 end
