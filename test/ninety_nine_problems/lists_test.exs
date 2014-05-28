@@ -80,4 +80,16 @@ defmodule NinetyNineProblems.ListsTest do
     assert Lists.rotate([1,2,3,4,5], 3) == [4,5,1,2,3]
   end
 
+  test "removes an element from a list" do
+    assert Lists.remove([1,2,3,4], 3) == [1,2,4]
+  end
+
+  test "inserts an element at a given position in a list" do
+    assert Lists.insert([1,2,3,4], 3, 2) == [1,3,2,3,4]
+  end
+
+  test "creates a range from 2 integers" do
+    assert Lists.range(1,5) == [1,2,3,4,5]
+  end
+
 end

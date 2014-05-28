@@ -155,6 +155,30 @@ defmodule NinetyNineProblems do
       do_rotate(t, current_counter-1, counter, [h|acc])
     end
 
+    def remove(list, index), do: do_remove(list, index, 1, [])
+    defp do_remove([], _index, _current, acc), do: acc |> reverse
+    defp do_remove([_h|t], index, index, acc) do
+      do_remove(t, index, index+1, acc)
+    end
+    defp do_remove([h|t], index, current, acc) do
+      do_remove(t, index, current+1, [h|acc])
+    end
+
+    def insert(list, item, index), do: do_insert(list, item, index, 1, [])
+    defp do_insert([], _item, _index, _current, acc), do: acc |> reverse
+    defp do_insert(list, item, index, index, acc) do
+      do_insert(list, item, index, index+1, [item|acc])
+    end
+    defp do_insert([h|t], item, index, current, acc) do
+      do_insert(t, item, index, current+1, [h|acc])
+    end
+
+    def range(start, finish), do: do_range(start, finish, [])
+    defp do_range(finish, finish, acc), do: [finish|acc] |> reverse
+    defp do_range(start, finish, acc) do
+      do_range(start+1, finish, [start | acc])
+    end
+
   end
 
 end
